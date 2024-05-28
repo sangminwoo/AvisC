@@ -1,68 +1,48 @@
-# Don't Miss the Forest for the Trees: Attentional Vision Calibration for Large Vision Language Models
-
-<!-- Arxiv Link, Project Link -->
-<div style='display:flex; gap: 0.25rem; '>
-<a href="https://arxiv.org/abs/"><img src="https://img.shields.io/badge/arXiv-2312.15980-b31b1b.svg"></a>
-<a href="https://github.io/AvisC"><img src="https://img.shields.io/badge/Project%20Page-online-brightgreen"></a>
-<a href='LICENSE'><img src='https://img.shields.io/badge/License-Apache 2.0-g.svg'></a>
-</div>
-
-TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+# Academic Project Page Template
+This is an academic paper project page template.
 
 
-
-## Setup
-
-```bash
-conda create AvisC python=3.10
-conda activate AvisC
-git clone https://github.com/sangminwoo/AvisC.git
-cd AvisC
-pip install -r requirements.txt
-```
-
-
-## Models (TODO)
-
-* **LLaVA-1.5**
-* **InstructBLIP**
-* **Qwen-VL**
-
-*About model checkpoints preparation*
-TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+Example project pages built using this template are:
+- https://vision.huji.ac.il/spectral_detuning/
+- https://vision.huji.ac.il/podd/
+- https://dreamix-video-editing.github.io
+- https://vision.huji.ac.il/conffusion/
+- https://vision.huji.ac.il/3d_ads/
+- https://vision.huji.ac.il/ssrl_ad/
+- https://vision.huji.ac.il/deepsim/
 
 
 
-## Evaluation (TODO)
+## Start using the template
+To start using the template click on `Use this Template`.
 
-* **POPE (llava, qwen-vl)**: `bash eval_bench/scripts/pope_eval.sh` 
-  - Need to specify "model", "model_path"
-* **POPE (instructblip)**: `bash experiments/cd_scripts/pope_eval.sh` 
-  - Need to specify "model", "model_path"
-* **LLaVA-Bench (llava)**: `bash eval_bench/scripts/llava_bench_eval.sh`
-  - Need to specify "model", "model_path"
-* **MME**: `bash experiments/cd_scripts/mme_eval.sh`
-  - Need to specify "model", "model_path"
+The template uses html for controlling the content and css for controlling the style. 
+To edit the websites contents edit the `index.html` file. It contains different HTML "building blocks", use whichever ones you need and comment out the rest.  
 
-*About datasets preparation*
-TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+**IMPORTANT!** Make sure to replace the `favicon.ico` under `static/images/` with one of your own, otherwise your favicon is going to be a dreambooth image of me.
 
+## Components
+- Teaser video
+- Images Carousel
+- Youtube embedding
+- Video Carousel
+- PDF Poster
+- Bibtex citation
 
+## Tips:
+- The `index.html` file contains comments instructing you what to replace, you should follow these comments.
+- The `meta` tags in the `index.html` file are used to provide metadata about your paper 
+(e.g. helping search engine index the website, showing a preview image when sharing the website, etc.)
+- The resolution of images and videos can usually be around 1920-2048, there rarely a need for better resolution that take longer to load. 
+- All the images and videos you use should be compressed to allow for fast loading of the website (and thus better indexing by search engines). For images, you can use [TinyPNG](https://tinypng.com), for videos you can need to find the tradeoff between size and quality.
+- When using large video files (larger than 10MB), it's better to use youtube for hosting the video as serving the video from the website can take time.
+- Using a tracker can help you analyze the traffic and see where users came from. [statcounter](https://statcounter.com) is a free, easy to use tracker that takes under 5 minutes to set up. 
+- This project page can also be made into a github pages website.
+- Replace the favicon to one of your choosing (the default one is of the Hebrew University). 
+- Suggestions, improvements and comments are welcome, simply open an issue or contact me. You can find my contact information at [https://pages.cs.huji.ac.il/eliahu-horwitz/](https://pages.cs.huji.ac.il/eliahu-horwitz/)
 
 ## Acknowledgments
-This codebase borrows from most notably [VCD](https://github.com/DAMO-NLP-SG/VCD), [OPERA](https://github.com/shikiw/OPERA), and [LLaVA](https://github.com/haotian-liu/LLaVA).
-Many thanks to the authors for generously sharing their codes!
+Parts of this project page were adopted from the [Nerfies](https://nerfies.github.io/) page.
 
-
-
-## Citation
-If you find this repository helpful for your project, please consider citing our work :)
-
-```
-@article{placeholder2024,
-  title={placeholder}, 
-  author={placeholder},
-  journal={placeholder},
-  year={2024},
-}
-```
+## Website License
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
