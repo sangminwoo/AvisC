@@ -28,6 +28,7 @@ This repository contains the official pytorch implementation of the paper: "Don'
 <p align="center" width="100%">
 <img src="assets/observation.png" width="100%" alt="Observation">
 </p>
+
 **Attention bias in LVLMs.**
 Even when the image (V) does not contain information relevant to the query (Q), LVLMs exhibit a tendency for attention to be biased towards a few image tokens (i.e., blind tokens). This phenomenon is observed by averaging the attention weights across all layers when generating the first response token.
 
@@ -38,6 +39,7 @@ Even when the image (V) does not contain information relevant to the query (Q), 
 <p align="center" width="100%">
 <img src="assets/motivation.png" width="100%" alt="Motivation">
 </p>
+
 **Impact of blind/non-blind tokens on prediction logits.**
 **(Left)** Zeroing out image tokens with attention weights higher than the mean + standard deviation, i.e., blind tokens, does not significantly affect the original prediction logits, suggesting that LVLMs may assign high attention weights to tokens that do not carry significant object-discriminative information. Conversely, zeroing out non-blind tokens drastically disrupts the logits, often leading to near 50:50 probabilities, indicating a loss of object-discriminative information.
 **(Right)** Similarly, examples demonstrate that zeroing out non-blind tokens results in a loss of discriminative power for previously well-classified instances or produces entirely incorrect predictions, causing a significant drop in performance.
