@@ -81,7 +81,7 @@
             <div class="publication-links">
               <!-- Arxiv PDF link -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/pdf/2405.17820.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </span>
@@ -91,7 +91,7 @@
 
               <!-- Github link -->
               <span class="link-block">
-                <a href="https://github.com/YOUR REPO HERE" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://github.com/AvisC" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fab fa-github"></i>
                   </span>
@@ -101,7 +101,7 @@
 
               <!-- ArXiv abstract Link -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/abs/2405.17820" target="_blank" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="ai ai-arxiv"></i>
                 </span>
@@ -118,11 +118,10 @@
 
 
 <!-- Teaser video-->
-<section class="hero teaser">
+<!-- <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
         <source src="static/videos/banner_video.mp4"
         type="video/mp4">
       </video>
@@ -131,8 +130,10 @@
       </h2>
     </div>
   </div>
-</section>
+</section> -->
 <!-- End teaser video -->
+
+
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -142,7 +143,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            This study addresses the issue observed in Large Vision Language Models (LVLMs), where excessive attention on a few image tokens, referred to as blind tokens, leads to hallucinatory responses in tasks requiring fine-grained understanding of visual objects. We found that tokens receiving lower attention weights often hold essential information for identifying nuanced object details, ranging from merely recognizing object existence to identifying their attributes (color, position, etc.) and understanding their relationships. To counteract the over-emphasis on blind tokens and to accurately respond to user queries, we introduce a technique called Attentional Vision Calibration (AvisC). During the decoding phase, AvisC identifies blind tokens by analyzing the image-related attention distribution. It then dynamically adjusts the logits for the next token prediction by contrasting the logits conditioned on the original visual tokens with those conditioned on the blind tokens. This effectively lowers the dependency on blind tokens and promotes a more balanced consideration of all tokens. We validate AvisC on benchmarks such as POPE, MME, and AMBER, where it consistently outperforms existing decoding techniques in mitigating object hallucinations in LVLMs.
+            Recent advancements in Large Vision Language Models (LVLMs) have revolutionized how machines understand and generate textual responses based on visual inputs. Despite their impressive capabilities, they often produce "hallucinatory" outputs that do not accurately reflect the visual information, posing challenges in reliability and trustworthiness. Current methods such as contrastive decoding have made strides in addressing these issues by contrasting the original probability distribution of generated tokens with distorted counterparts; yet, generating visually-faithful outputs remains a challenge. In this work, we shift our focus to the opposite: What could serve as a complementary enhancement to the original probability distribution? We propose a simple, training-free method termed <strong>RITUAL</strong> to enhance robustness against hallucinations in LVLMs. Our approach employs random image transformations as complements to the original probability distribution, aiming to mitigate the likelihood of hallucinatory visual explanations by enriching the model’s exposure to varied visual scenarios. Our empirical results show that while the isolated use of transformed images initially degrades performance, strategic implementation of these transformations can indeed serve as effective complements. Notably, our method is compatible with current contrastive decoding methods and does not require external models or costly self-feedback mechanisms, making it a practical addition. In experiments, RITUAL significantly outperforms existing contrastive decoding methods across several object hallucination benchmarks, including POPE, CHAIR, and MME.
           </p>
         </div>
       </div>
@@ -152,45 +153,209 @@
 <!-- End paper abstract -->
 
 
+
+<section class="hero is-small">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">Observation</h2>
+        <div class="hero-body">
+          <img src="static/images/motivation.png" alt="Motivation"/>
+          <h2 class="subtitle has-text-centered">
+          <strong>Attention bias in LVLMs.</strong>
+          Even when the image (V) does not contain information relevant to the query (Q), LVLMs exhibit a tendency for attention to be biased towards a few image tokens (i.e., blind tokens). This phenomenon is observed by averaging the attention weights across all layers when generating the first response token.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small is-light">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">Motivation</h2>
+        <div class="hero-body">
+          <img src="static/images/motivation.png" alt="Motivation"/>
+          <h2 class="subtitle has-text-centered">
+          <strong>Impact of blind/non-blind tokens on prediction logits.</strong>
+          <strong>(Left)</strong> Zeroing out image tokens with attention weights higher than the mean + standard deviation, i.e., blind tokens, does not significantly affect the original prediction logits, suggesting that LVLMs may assign high attention weights to tokens that do not carry significant object-discriminative information. Conversely, zeroing out non-blind tokens drastically disrupts the logits, often leading to near 50:50 probabilities, indicating a loss of object-discriminative information.
+          <strong>(Right)</strong> Similarly, examples demonstrate that zeroing out non-blind tokens results in a loss of discriminative power for previously well-classified instances or produces entirely incorrect predictions, causing a significant drop in performance.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small is-light">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">Method: AvisC</h2>
+        <div class="hero-body">
+          <img src="static/images/overview.png" alt="Overview"/>
+          <h2 class="subtitle has-text-centered">
+          We propose a straightforward method, called AVISC, to enhance visual object understanding in LVLMs during the decoding phase. AVISC dynamically calibrates the over-emphasis on blind tokens on-the-fly at every token generation step. The calibration is guided by the attention patterns of image tokens in response to the given image and textual query. Importantly, AVISC operates without additional training, external models, or complex self-feedback mechanisms.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">POPE Results</h2>
+        <div class="hero-body">
+          <img src="static/images/pope.png" alt="POPE" style="width: 90%;"/>
+          <h2 class="subtitle has-text-centered">
+          AVISC consistently outperforms base decoding and other methods: VCD and M3ID. We reimplemented VCD and M3ID in our evaluation setup.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">MME-Fullset Results</h2>
+        <div class="hero-body">
+          <img src="static/images/mme-fullset.png" alt="MME-Fullset" style="width: 90%;"/>
+          <h2 class="subtitle has-text-centered">
+          AVISC achieves top performance in 7 of 14 categories with InstructBLIP and in 11 categories with LLaVA-1.5. Beyond minimizing hallucinations, AVISC also boosts the general functionality of LVLMs.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">MME-Hallucination Results</h2>
+        <div class="hero-body">
+          <img src="static/images/mme-hallucination.png" alt="MME-Hallucination" style="width: 90%;"/>
+          <h2 class="subtitle has-text-centered">
+          Our method effectively reduces hallucinations at both object and attribute levels, surpassing VCD and M3ID in Total Score.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="title is-2">AMBER Results</h2>
+        <div class="hero-body">
+          <img src="static/images/amber.png" alt="AMBER" style="width: 40%;"/>
+          <h2 class="subtitle has-text-centered">
+          AVISC outperforms contrastive decoding baselines in both generative and discriminative tasks, achieving the highest AMBER score.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="hero-body">
+          <img src="static/images/amber_discriminative.png" alt="AMBER Discriminative" style="width: 40%;"/>
+          <h2 class="subtitle has-text-centered">
+          Our demonstrates superior performance overall, particularly excelling in the Existence and Action categories in both InstructBLIP and LLaVA-1.5.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 <!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Qualitative Results</h2>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <img src="static/images/llava_bench.png" alt="LLaVA Bench Results"/>
+              <h2 class="subtitle has-text-centered">
+              <strong>LLaVA-Bench.</strong>
+              Hallucinations are highlighted in red.
+            </div>
+            <div class="item">
+              <img src="static/images/qualitative_amber_instructblip.png" alt="AMBER InstructBLIP"/>
+              <h2 class="subtitle has-text-centered">
+              <strong>AMBER InstructBLIP.</strong>
+              Hallucinations are highlighted in red.
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/qualitative_amber_llava.png" alt="AMBER LLaVA-1.5"/>
+              <h2 class="subtitle has-text-centered">
+              <strong>AMBER LLaVA-1.5.</strong>
+              Hallucinations are highlighted in red.
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/qualitative_mme_instructblip.png" alt="MME InstructBLIP"/>
+              <h2 class="subtitle has-text-centered">
+              <strong>MME InstructBLIP.</strong>
+              Hallucinations are highlighted in red.
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/qualitative_mme_llava.png" alt="MME LLaVA-1.5"/>
+              <h2 class="subtitle has-text-centered">
+              <strong>MME LLaVA-1.5.</strong>
+              Hallucinations are highlighted in red.
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/qualitative_pope.png" alt="POPE"/>
+              <h2 class="subtitle has-text-centered">
+              <strong>POPE.</strong>
+              Hallucinations are highlighted in red.
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
     </div>
   </div>
-</div>
-</div>
 </section>
 <!-- End image carousel -->
-
 
 
 
@@ -201,7 +366,6 @@
       <h2 class="title is-3">Video Presentation</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          
           <div class="publication-video">
             <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
@@ -211,6 +375,7 @@
   </div>
 </section> -->
 <!-- End youtube video -->
+
 
 
 <!-- Video carousel -->
@@ -245,9 +410,6 @@
 
 
 
-
-
-
 <!-- Paper poster -->
 <!-- <section class="hero is-small is-light">
   <div class="hero-body">
@@ -261,23 +423,23 @@
 <!--End paper poster -->
 
 
+
 <!--BibTex citation -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-@misc{woo2023harmonyview,
-      title={Don’t Miss the Forest for the Trees: Attentional Vision Calibration for Large Vision Language Models},
-      author={Sangmin Woo and Donguk Kim and Jaehyuk Jang and Yubin Choi and Changick Kim},
-      year={2024},
-      eprint={2312.15980},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{{woo2024dont,
+  title={Don't Miss the Forest for the Trees: Attentional Vision Calibration for Large Vision Language Models}, 
+  author={Woo, Sangmin and Kim, Donguk and Jang, Jaehyuk and Choi, Yubin and Kim, Changick},
+  journal={arXiv preprint arXiv:2405.17820},
+  year={2024},
 }
     </code></pre>
   </div>
 </section>
 <!--End BibTex citation -->
+
 
 
 <footer class="footer">
@@ -286,8 +448,8 @@
     <div class="column is-8">
       <div class="content">
         <p>
-          This page was adapted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page, licensed under a <a rel="license"  href="http://  creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-          Commons Attribution-ShareAlike 4.0 International License</a>.
+          This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+          This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
         </p>
       </div>
     </div>
@@ -295,11 +457,15 @@
 </div>
 </footer>
 
+
+
 <!-- Statcounter tracking code -->
   
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
   <!-- End of Statcounter Code -->
+
+
 
 </body>
 </html>
