@@ -136,7 +136,7 @@ Many thanks to the authors for generously sharing their codes!
 If you find this repository helpful for your project, please consider citing our work :)
 
 ```
-@article{{woo2024dont,
+@article{woo2024dont,
   title={Don't Miss the Forest for the Trees: Attentional Vision Calibration for Large Vision Language Models}, 
   author={Woo, Sangmin and Kim, Donguk and Jang, Jaehyuk and Choi, Yubin and Kim, Changick},
   journal={arXiv preprint arXiv:2405.17820},
